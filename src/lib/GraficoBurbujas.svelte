@@ -5,8 +5,15 @@
 
     let graficoBurbujas;
     let chart;
+    let datosBurbujas = [];
 
-    onMount(() => {
+    onMount(async() => {
+
+        const res = await fetch ("/data/curva_movilidad_nacional.csv");
+        const rows = (await res.text()).trim().split("\n").map(r => r.split(","));
+        datosBurbujas = rows.slice(1);
+
+
         chart = new Chart (graficoBurbujas, {
             type: 'bubble',
             data: {
@@ -32,5 +39,4 @@
 
 <div style="text-align: center;">
     <canvas bind:this={graficoBurbujas} width="600" height="500"></canvas>
-
 </div>
