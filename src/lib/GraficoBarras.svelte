@@ -9,6 +9,14 @@
 
     function actualizarBarra() {
         if (!graficoBarras || datosCCAA.length === 0) return;
+
+        let dataFiltrada = datosCCAA;
+        if (filtroComunidades !== "todas") {
+            dataFiltrada = datosCCAA.filter(
+                (d) => d.ccaa === filtroComunidades,
+            );
+        }
+
         if (!graficoBarrasInstancia) {
             graficoBarrasInstancia = new Chart(graficoBarras, {
                 type: "bar",
@@ -49,6 +57,10 @@
                     },
                 },
             });
+        }else{
+            graficoBarrasInstancia.data.labels = dataFiltrada.map(d => d.ccaa);
+            graficoBarrasInstancia.data.datasets[0].data = dataFiltrada.map(d => d.value);
+            graficoBarrasInstancia.update();
         }
     }
 
@@ -70,5 +82,13 @@
         actualizarBarra();
     });
 </script>
-
-
+<div style="text-align: center;">
+  <h2>Selecciona Comunidad:</h2>
+  <select bind:value={filtroComunidades} on:change={actualizarBarra}>
+    <option value="todas">Todas</option>
+    {#each datosCCAA as d}
+      <option value={d.ccaa}>{d.ccaa}</option>
+    {/each}
+  </select>
+  <canvas bind:this={graficoBarras} width="400" height="400"></canvas>
+</div>
