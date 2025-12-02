@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   let datos = [];
-    //COMPROBACIÓN DE COMMIT
+
   // Nuevas variables para el sankey
   let nodes = [];
   let links = [];
