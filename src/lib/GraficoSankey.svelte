@@ -1,11 +1,15 @@
 <script>
   import { onMount } from "svelte";
+  import Plotly from "plotly.js-dist-min";   
 
   let datos = [];
 
-  // Nuevas variables para el sankey
+  // Datos para el sankey
   let nodes = [];
   let links = [];
+
+  // Referencia al <div> donde dibujaremos el gráfico
+  let chartEl;                                
 
   onMount(async () => {
     const res = await fetch("/data/distribucion_quintiles_nacional_padres_hijos.csv");
@@ -27,43 +31,72 @@
 
   // Cuando cambie `datos`, calculamos nodos y enlaces
   $: if (datos.length > 0) {
-    // nombres columnas de hijos (0-20, 20-40, ...)
     const columnasHijos = Object.keys(datos[0]).filter(
       (k) => k !== "quintil_padres"
     );
 
-    // 5 nodos de padres
     const nodosPadres = datos.map((fila) => ({
       name: `Padres ${fila.quintil_padres}`
     }));
 
-    // 5 nodos de hijos
     const nodosHijos = columnasHijos.map((q) => ({
       name: `Hijos ${q}`
     }));
 
     nodes = [...nodosPadres, ...nodosHijos];
 
-    // Enlaces: de cada padre a cada quintil de hijo
     const tmpLinks = [];
     datos.forEach((fila, iPadre) => {
       columnasHijos.forEach((q, j) => {
         tmpLinks.push({
-          source: iPadre, // índice nodo padre
-          target: nodosPadres.length + j, // índice nodo hijo
-          value: fila[q] // porcentaje
+          source: iPadre,
+          target: nodosPadres.length + j,
+          value: fila[q]
         });
       });
     });
 
     links = tmpLinks;
   }
+
+  // Cuando tenemos el div y los datos, dibujamos el sankey
+  $: if (chartEl && nodes.length && links.length) {
+    const labels = nodes.map((n) => n.name);
+    const source = links.map((l) => l.source);
+    const target = links.map((l) => l.target);
+    const value = links.map((l) => l.value);
+
+    const data = [
+      {
+        type: "sankey",
+        orientation: "h",
+        node: {
+          label: labels
+        },
+        link: {
+          source,
+          target,
+          value
+        }
+      }
+    ];
+
+    const layout = {
+      font: { size: 12 }
+    };
+
+    Plotly.newPlot(chartEl, data, layout);
+  }
 </script>
+
 <div style="text-align: center;">
   <h2>Movilidad por quintiles (Gráfico Sankey)</h2>
-  <div>
-    ESPACIO PARA EL GRÁFICO
-  </div>
+
+  <!-- Aquí se pinta el gráfico -->
+  <div
+    bind:this={chartEl}                          
+    style="max-width: 900px; height: 500px; margin: 1rem auto;"
+  ></div>
 
   {#if datos.length === 0}
     <p>Cargando datos...</p>
