@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import Plotly from "plotly.js-dist-min";   
+  import Plotly from "plotly.js-dist-min";
 
   let datos = [];
 
@@ -9,7 +9,7 @@
   let links = [];
 
   // Referencia al <div> donde dibujaremos el gráfico
-  let chartEl;                                
+  let chartEl;
 
   onMount(async () => {
     const res = await fetch("/data/distribucion_quintiles_nacional_padres_hijos.csv");
@@ -29,7 +29,7 @@
     });
   });
 
-  // Cuando cambie `datos`, calculamos nodos y enlaces
+  // Cuando ya tenemos datos, creamos nodos y enlaces
   $: if (datos.length > 0) {
     const columnasHijos = Object.keys(datos[0]).filter(
       (k) => k !== "quintil_padres"
@@ -71,7 +71,9 @@
         type: "sankey",
         orientation: "h",
         node: {
-          label: labels
+          label: labels,
+          pad: 15,
+          thickness: 20
         },
         link: {
           source,
@@ -82,38 +84,21 @@
     ];
 
     const layout = {
-      font: { size: 12 }
+      font: { size: 12 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)"
     };
 
-    Plotly.newPlot(chartEl, data, layout);
+    Plotly.newPlot(chartEl, data, layout, { responsive: true });
   }
 </script>
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-top: 2rem;">
   <h2>Movilidad por quintiles (Gráfico Sankey)</h2>
 
-  <!-- Aquí se pinta el gráfico -->
+  <!--gráfico -->
   <div
-    bind:this={chartEl}                          
+    bind:this={chartEl}
     style="max-width: 900px; height: 500px; margin: 1rem auto;"
   ></div>
-
-  {#if datos.length === 0}
-    <p>Cargando datos...</p>
-  {:else}
-    <h3>Datos originales (CSV):</h3>
-    <pre style="text-align: left; font-size: 0.8rem;">
-{JSON.stringify(datos, null, 2)}
-    </pre>
-
-    <h3>Nodos:</h3>
-    <pre style="text-align: left; font-size: 0.8rem;">
-{JSON.stringify(nodes, null, 2)}
-    </pre>
-
-    <h3>Enlaces:</h3>
-    <pre style="text-align: left; font-size: 0.8rem;">
-{JSON.stringify(links, null, 2)}
-    </pre>
-  {/if}
 </div>
