@@ -82,7 +82,8 @@
       node: {
         label: labels,
         pad: 15,
-        thickness: 20
+        thickness: 20,
+        hovertemplate: 'Quintil: %{label}<extra></extra>'
       },
       link: {
         source,
@@ -90,8 +91,9 @@
         value,
         // color normal de los enlaces
         color: linkColors,
-        // color (con otra opacidad) cuando haces hover
-        hovercolor: hoverColors
+        // color con hover
+        hovercolor: hoverColors,
+        hovertemplate: '%{value}%<extra></extra>'
       }
     }
   ];
