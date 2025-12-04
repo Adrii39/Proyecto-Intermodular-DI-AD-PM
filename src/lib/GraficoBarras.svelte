@@ -83,7 +83,8 @@
     });
 </script>
 <div style="text-align: center;">
-  <h2>Selecciona Comunidad:</h2>
+  <h2>Centil medio hijos/CA (Grafico de Barras)</h2>
+  <h3>Selecciona Comunidad:</h3>
   <select bind:value={filtroComunidades} on:change={actualizarBarra}>
     <option value="todas">Todas</option>
     {#each datosCCAA as d}
@@ -92,3 +93,11 @@
   </select>
   <canvas bind:this={graficoBarras} width="400" height="400"></canvas>
 </div>
+<p
+  style="max-width: 600px; margin: 0.5rem auto 0;font-size: 0.9rem;"
+>
+  El gráfico muestra, para cada comunidad autónoma, el centil medio de renta
+  que alcanzan los hijos cuando sus padres se sitúan en el percentil 20 de la
+  distribución nacional. Cuanto más a la derecha aparece una comunidad, mayor
+  es la posición relativa que alcanzan sus hijos en la distribución de renta.
+</p>

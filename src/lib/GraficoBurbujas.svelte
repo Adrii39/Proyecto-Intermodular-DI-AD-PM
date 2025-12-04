@@ -73,7 +73,7 @@
 <div style="text-align: center;">
     <select bind:value={filtroBurbuja} on:change={actualizarGraficoBurbuja}>
         <option value="mediana">Mediana</option>
-        <option value="media">media</option>
+        <option value="media">Media</option>
     </select>
     <canvas bind:this={graficoBurbujas} width="600" height="500"></canvas>
 </div>

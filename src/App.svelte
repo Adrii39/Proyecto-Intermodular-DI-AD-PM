@@ -5,7 +5,7 @@
 </script>
 
 <main style="text-align: center;">
-  <h1>Primer gráfico</h1>
+  <h1>Ascensor Social</h1>
   <br>
   <hr>
   
