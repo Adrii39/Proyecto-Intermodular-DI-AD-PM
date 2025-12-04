@@ -101,19 +101,26 @@
   const layout = {
     font: { size: 12 },
     paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(0,0,0,0)"
+    plot_bgcolor: "rgba(0,0,0,0)",
+    margin: { t: 10, l: 0, r: 0, b: 0 } 
   };
 
   Plotly.newPlot(chartEl, data, layout, { responsive: true });
 }
 </script>
 
-<div style="text-align: center; margin-top: 2rem;">
-  <h2>Movilidad por quintiles (Gráfico Sankey)</h2>
+
+<div style="text-align: center; margin-top: 6rem;">
+  <h2 style="margin-bottom: 0.25rem;">Movilidad por quintiles (Gráfico Sankey)</h2>
 
   <!--gráfico -->
   <div
     bind:this={chartEl}
-    style="max-width: 900px; height: 500px; margin: 1rem auto;"
+    style="max-width: 900px; height: 500px; margin: 0 auto 0.25rem;"
   ></div>
+  <p
+   style="max-width: 500px; margin: 0 auto 0.25rem ;font-size: 0.9rem;"
+   >Este gráfico Sankey muestra el porcentaje de hijos que acaban en cada
+    quintil de renta dado el quintil de renta de sus padres. Cada flujo
+    representa “el % de padres de un quintil que tienen hijos en otro”.</p>
 </div>
