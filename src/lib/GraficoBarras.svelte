@@ -82,7 +82,7 @@
         actualizarBarra();
     });
 </script>
-<div style="text-align: center;">
+<div style="text-align: center; margin-top: 6rem;">
   <h2>Centil medio hijos/CA (Grafico de Barras)</h2>
   <h3>Selecciona Comunidad:</h3>
   <select bind:value={filtroComunidades} on:change={actualizarBarra}>

@@ -70,7 +70,7 @@
 
 </script>
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-top: 6rem;">
     <h2>Curva de movilidad intergeneracional (Gráfico de Burbujas)</h2>
     <select bind:value={filtroBurbuja} on:change={actualizarGraficoBurbuja}>
         <option value="mediana">Mediana</option>
@@ -78,11 +78,7 @@
     </select>
     <canvas bind:this={graficoBurbujas} width="600" height="500"></canvas>
       <p
-    style="
-      max-width: 600px;
-      margin: 0.5rem auto 0;
-      font-size: 0.9rem;
-    "
+    style="max-width: 600px; margin: 0.5rem auto 0;font-size: 0.9rem;"
   >
     Este gráfico de burbujas muestra, para cada centil de renta de los padres
     (eje horizontal), el centil que alcanzan sus hijos en la distribución de
