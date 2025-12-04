@@ -6,7 +6,7 @@
     let graficoBurbujas;
     let chart;
     let datosBurbujas = [];
-    let filtroBurbuja = "meidana";
+    let filtroBurbuja = "media";
 
     function actualizarGraficoBurbuja() {
 
@@ -71,9 +71,23 @@
 </script>
 
 <div style="text-align: center;">
+    <h2>Curva de movilidad intergeneracional (Gráfico de Burbujas)</h2>
     <select bind:value={filtroBurbuja} on:change={actualizarGraficoBurbuja}>
         <option value="mediana">Mediana</option>
         <option value="media">Media</option>
     </select>
     <canvas bind:this={graficoBurbujas} width="600" height="500"></canvas>
+      <p
+    style="
+      max-width: 600px;
+      margin: 0.5rem auto 0;
+      font-size: 0.9rem;
+    "
+  >
+    Este gráfico de burbujas muestra, para cada centil de renta de los padres
+    (eje horizontal), el centil que alcanzan sus hijos en la distribución de
+    renta (eje vertical). El desplegable permite alternar entre usar la
+    mediana o la media como medida de la
+    posición de los hijos para cada centil de padres.
+  </p>
 </div>

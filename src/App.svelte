@@ -6,11 +6,12 @@
 
 <main style="text-align: center;">
   <h1>Ascensor Social</h1>
-  <br>
-  <hr>
   
-  <h1>Ranking por CCAA</h1>
+  <hr>
+  <br>
   <GraficoBurbujas />
+  <br>
   <GraficoBarras />
+  <br>
   <GraficoSankey />
 </main>

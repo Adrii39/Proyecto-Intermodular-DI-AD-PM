@@ -119,7 +119,7 @@
     style="max-width: 900px; height: 500px; margin: 0 auto 0.25rem;"
   ></div>
   <p
-   style="max-width: 500px; margin: 0 auto 0.25rem ;font-size: 0.9rem;"
+   style="max-width: 600px; margin: 0 auto 0.25rem ;font-size: 0.9rem;"
    >Este gráfico Sankey muestra el porcentaje de hijos que acaban en cada
     quintil de renta dado el quintil de renta de sus padres. Cada flujo
     representa “el % de padres de un quintil que tienen hijos en otro”.</p>
