@@ -74,11 +74,13 @@
           label: labels,
           pad: 15,
           thickness: 20
+          
         },
         link: {
           source,
           target,
-          value
+          value,
+          color: "rgba(150,150,150,0.3)"
         }
       }
     ];
