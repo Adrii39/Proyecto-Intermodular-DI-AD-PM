@@ -4,7 +4,6 @@
 
   let datos = [];
 
-  // Datos para el sankey
   let nodes = [];
   let links = [];
 
@@ -66,6 +65,13 @@
     const target = links.map((l) => l.target);
     const value = links.map((l) => l.value);
 
+    // Opacidad base para los enlaces
+    const baseOpacity = 0.5; // cómo se ve normalmente
+    const baseColor = `rgba(150,150,150,${baseOpacity})`;
+
+    // Un color por cada link 
+    const linkColors = links.map(() => baseColor);
+
     const data = [
       {
         type: "sankey",
@@ -74,13 +80,12 @@
           label: labels,
           pad: 15,
           thickness: 20
-          
         },
         link: {
           source,
           target,
           value,
-          color: "rgba(150,150,150,0.3)"
+          color: linkColors
         }
       }
     ];
