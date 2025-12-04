@@ -60,44 +60,50 @@
 
   // Cuando tenemos el div y los datos, dibujamos el sankey
   $: if (chartEl && nodes.length && links.length) {
-    const labels = nodes.map((n) => n.name);
-    const source = links.map((l) => l.source);
-    const target = links.map((l) => l.target);
-    const value = links.map((l) => l.value);
+  const labels = nodes.map((n) => n.name);
+  const source = links.map((l) => l.source);
+  const target = links.map((l) => l.target);
+  const value = links.map((l) => l.value);
 
-    // Opacidad base para los enlaces
-    const baseOpacity = 0.5; // cómo se ve normalmente
-    const baseColor = `rgba(150,150,150,${baseOpacity})`;
+  // Base y opacidad al hacer hover
+  const baseOpacity = 0.2;   
+  const hoverOpacity = 1;  
 
-    // Un color por cada link 
-    const linkColors = links.map(() => baseColor);
+  const baseColor = `rgba(150,150,150,${baseOpacity})`;
+  const hoverColor = `rgba(150,150,150,${hoverOpacity})`;
 
-    const data = [
-      {
-        type: "sankey",
-        orientation: "h",
-        node: {
-          label: labels,
-          pad: 15,
-          thickness: 20
-        },
-        link: {
-          source,
-          target,
-          value,
-          color: linkColors
-        }
+  const linkColors = links.map(() => baseColor);
+  const hoverColors = links.map(() => hoverColor);
+
+  const data = [
+    {
+      type: "sankey",
+      orientation: "h",
+      node: {
+        label: labels,
+        pad: 15,
+        thickness: 20
+      },
+      link: {
+        source,
+        target,
+        value,
+        // color normal de los enlaces
+        color: linkColors,
+        // color (con otra opacidad) cuando haces hover
+        hovercolor: hoverColors
       }
-    ];
+    }
+  ];
 
-    const layout = {
-      font: { size: 12 },
-      paper_bgcolor: "rgba(0,0,0,0)",
-      plot_bgcolor: "rgba(0,0,0,0)"
-    };
+  const layout = {
+    font: { size: 12 },
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)"
+  };
 
-    Plotly.newPlot(chartEl, data, layout, { responsive: true });
-  }
+  Plotly.newPlot(chartEl, data, layout, { responsive: true });
+}
 </script>
 
 <div style="text-align: center; margin-top: 2rem;">
